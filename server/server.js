@@ -12,10 +12,14 @@ app.use(express.json());
 // Routes
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/admin", require("./routes/adminRoutes"));
-app.use("/api/products", require("./routes/productRoutes"));
-app.use("/api/orders", require("./routes/orderRoutes"));
-app.use(errorHandler);
-app.use(notFound);
+//app.use("/api/products", require("./routes/productRoutes"));
+//app.use("/api/orders", require("./routes/orderRoutes"));
+//app.use(errorHandler);
+//app.use(notFound);
+
+app.use("/", (req, res) => {
+  res.send('Welcome to the Shopping API');
+});
 
 
 const PORT = process.env.PORT || 5000;
