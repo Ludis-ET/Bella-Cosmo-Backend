@@ -39,15 +39,17 @@ The return statement is added after the error response to ensure the middleware 
 
 const protectAdmin = async (req, res, next) => {
   let token;
-
   try {
     if (
       req.headers.authorization &&
       req.headers.authorization.startsWith("Bearer")
     ) {
       token = req.headers.authorization.split(" ")[1];
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
+      const decoded = jwt.verify(token, process.env.JWT_SECRET); // i have used different JWT token that has admin role in it when an admin register
+      if (decoded.role !== "admin") {
+        res.status(403).json({message : "Admin Role Required" });
+      return;
+    }
       req.admin = await Admin.findById(decoded.id).select("-password");
       next();
     } else {

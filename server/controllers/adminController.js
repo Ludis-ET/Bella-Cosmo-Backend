@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Admin = require("../models/Admin");
-const generateToken = require("../utils/generateToken");
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
 
 // @desc    Register a new admin
 // @route   POST /api/admin/register
@@ -22,15 +22,19 @@ const registerAdmin = asyncHandler(async (req, res) => {
     password,
   });
 
+const token = jwt.sign({ id: admin._id, role: "admin" }, process.env.JWT_SECRET, {
+  expiresIn: "1h",
+});
+
   if (admin) {
     res.status(201).json({
       success: true,
       message: "Admin registered successfully",
+      token,
       data: {
         _id: admin._id,
         name: admin.name,
         phoneNumber: admin.phoneNumber,
-        token: generateToken(admin._id),
       },
     });
   } else {
@@ -51,11 +55,11 @@ const loginAdmin = asyncHandler(async (req, res) => {
     res.json({
       success: true,
       message: "Admin logged in successfully",
+      token,
       data: {
         _id: admin._id,
         name: admin.name,
         phoneNumber: admin.phoneNumber,
-        token: generateToken(admin._id),
       },
     });
   } else {

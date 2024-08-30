@@ -33,8 +33,7 @@ const registerUser = asyncHandler(async (req, res) => {
       },
     });
   } else {
-    res.status(400);
-    throw new Error("Invalid user data");
+    res.status(400).json({message: "User registration failed"});
   }
 });
 
@@ -58,8 +57,8 @@ const loginUser = asyncHandler(async (req, res) => {
       },
     });
   } else {
-    res.status(401);
-    throw new Error("Invalid phoneNumber or password");
+    //error json response message
+    res.status(401).json({ message: "Invalid credentials" });
   }
 });
 

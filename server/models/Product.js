@@ -10,3 +10,11 @@ const productSchema = new mongoose.Schema({
 
 const Product = mongoose.model("Product", productSchema);
 module.exports = Product;
+
+ /* {
+    name: 'Product 2',
+    description: 'This is product 2 description.',
+    price: 200,
+    category: 'Category 2',
+    imageUrl: 'https://example.com/product2.jpg',
+  } */
