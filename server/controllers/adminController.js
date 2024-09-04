@@ -52,6 +52,18 @@ const loginAdmin = asyncHandler(async (req, res) => {
   const admin = await Admin.findOne({ phoneNumber });
 
   if (admin && (await admin.matchPassword(password))) {
+    const token = jwt.sign(
+      { id: admin._id, role: "admin" },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
+
+    // Save the token in the admin's tokens array
+    admin.tokens.push(token);
+    await admin.save();
+
     res.json({
       success: true,
       message: "Admin logged in successfully",
@@ -67,12 +79,9 @@ const loginAdmin = asyncHandler(async (req, res) => {
     throw new Error("Invalid phoneNumber or password");
   }
 });
-
-//function for admin to get the list of users
 // @desc    Get list of users
 // @route   GET /api/admin/users
 // @access  Private/Admin
-//a function to get the list of users from database
 
 const getUsers = asyncHandler(async (req, res) => {
   const users = await User.find({});
@@ -83,8 +92,34 @@ const getUsers = asyncHandler(async (req, res) => {
     data: users,
   });
 });
+
+// @desc    Logout admin
+// @route   POST /api/admin/logout
+// @access  Private/Admin
+const logoutAdmin = asyncHandler(async (req, res) => {
+  try {
+    // Check if req.admin and req.token are defined
+    if (!req.admin || !req.token) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Admin or token not found." });
+    }
+
+    // Filter out the token from the admin's tokens array
+    req.admin.tokens = req.admin.tokens.filter((token) => token !== req.token);
+
+    // Save the updated admin document
+    await req.admin.save();
+
+    res.json({ success: true, message: "Admin logged out successfully." });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 module.exports = {
   registerAdmin,
   loginAdmin,
   getUsers,
+  logoutAdmin,
 };

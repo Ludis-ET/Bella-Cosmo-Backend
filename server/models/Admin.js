@@ -5,15 +5,17 @@ const AdminSchema = new mongoose.Schema({
   name: { type: String, required: true },
   phoneNumber: { type: Number, required: true },
   password: { type: String, required: true },
+  tokens: { type: [String], default: [] }, // Add tokens array
 });
 
 AdminSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
-    next();
+    return next(); // Make sure to return here
   }
 
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
+  next(); // Call next after hashing
 });
 
 AdminSchema.methods.matchPassword = async function (enteredPassword) {

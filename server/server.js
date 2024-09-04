@@ -1,7 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
-const { notFound, errorHandler } = require("./utils/errorHandler");
+//const { notFound, errorHandler } = require("./utils/errorHandler");
 
 dotenv.config();
 connectDB();
@@ -12,8 +12,8 @@ app.use(express.json());
 // Routes
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/admin", require("./routes/adminRoutes"));
-//app.use("/api/products", require("./routes/productRoutes"));
-//app.use("/api/orders", require("./routes/orderRoutes"));
+app.use("/api/products", require("./routes/productRoutes"));
+app.use("/api/orders", require("./routes/orderRoutes"));
 //app.use(errorHandler);
 //app.use(notFound);
 

@@ -20,22 +20,14 @@ const protectUser = async (req, res, next) => {
       req.user = await User.findById(decoded.id).select("-password");
       next();
     } catch (error) {
-      res.status(401);
-      throw new Error("Not authorized, token failed");
+      res.status(401).json({ message: "Not authorized, token failed" });
+      return;
     }
-  }
-
-  if (!token) {
-    res.status(401);
-    throw new Error("Not authorized, no token");
-
+  } else {
+    res.status(401).json({ message: "Not authorized, no token" });
+    return;
   }
 };
-//new update
-/* Wrapped the entire middleware function in a try-catch block to handle any errors that might occur.
-Moved the if (!token) block inside the try block, as it's part of the same logical flow.
-Instead of throwing an error, the middleware now sends a JSON response with an appropriate error message and HTTP status code.
-The return statement is added after the error response to ensure the middleware function doesn't continue to the next middleware or route handler. */
 
 const protectAdmin = async (req, res, next) => {
   let token;
@@ -45,22 +37,27 @@ const protectAdmin = async (req, res, next) => {
       req.headers.authorization.startsWith("Bearer")
     ) {
       token = req.headers.authorization.split(" ")[1];
-      const decoded = jwt.verify(token, process.env.JWT_SECRET); // i have used different JWT token that has admin role in it when an admin register
+
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
       if (decoded.role !== "admin") {
-        res.status(403).json({message : "Admin Role Required" });
-      return;
-    }
+        return res.status(403).json({ message: "Admin Role Required" });
+      }
+
       req.admin = await Admin.findById(decoded.id).select("-password");
+
+      if (!req.admin) {
+        return res.status(404).json({ message: "Admin not found" });
+      }
+
+      req.token = token; // Set the token in req
       next();
     } else {
-      res.status(401).json({ message: "Not authorized, no token" });
-      return;
+      return res.status(401).json({ message: "Not authorized, no token" });
     }
   } catch (error) {
-    console.error(error);
-    res.status(401).json({ message: "Not authorized, Invalid token failed" });
-    return;
+    console.error("Error:", error);
+    return res.status(401).json({ message: "Not authorized, Invalid token" });
   }
 };
-
 module.exports = { protectUser, protectAdmin };

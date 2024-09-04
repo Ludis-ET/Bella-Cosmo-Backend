@@ -1,13 +1,16 @@
 const express = require("express");
-const { registerAdmin, loginAdmin, getUsers } = require("../controllers/adminController");
+const {
+  registerAdmin,
+  loginAdmin,
+  getUsers,
+  logoutAdmin,
+} = require("../controllers/adminController");
 const router = express.Router();
-const {protectAdmin} = require("../middlewares/authMiddleware");
-
+const { protectAdmin } = require("../middlewares/authMiddleware");
 
 router.post("/register", registerAdmin);
 router.post("/login", loginAdmin);
-// add protectAdmin to verify that only admins are allowed to get the list of users
 router.get("/users", protectAdmin, getUsers);
+router.post("/logout", protectAdmin, logoutAdmin);
 
-
-module.exports = router;
+module.exports = router; 
