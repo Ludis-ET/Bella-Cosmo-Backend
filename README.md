@@ -1,115 +1,68 @@
-# Gift Shop Website
+**README.md**
 
-This project is a full-stack application for a gift shop that offers products like flowers, vases, and more. The website allows clients to browse products and place orders, while the shop owner (admin) can manage products and view orders through an admin dashboard.
+```markdown
+# Shopping App
 
-## Table of Contents
-
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [System Design](#system-design)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [API Endpoints](#api-endpoints)
-- [Future Enhancements](#future-enhancements)
-
-## Features
-
-### Client (User)
-- Browse and view products.
-- Place orders for selected products.
-- View their order history.
-
-### Admin (Shop Owner)
-- Add, update, and remove products.
-- View orders placed by users.
-- Manage product inventory.
-
-## Tech Stack
-
-- **Frontend**: React, CSS, Emotion (for styling)
-- **Backend**: Node.js, Express.js, MongoDB, Mongoose
-- **State Management**: Redux Toolkit, Redux Saga
-- **Authentication**: JWT (JSON Web Tokens)
-- **Version Control**: Git, GitHub
-
-## System Design
-
-The project is structured to have separate sections for clients and the admin. 
-
-- **User Flow**: Users can browse products, add them to their cart, and place an order after logging in.
-- **Admin Flow**: Admin can log into a dashboard where they can manage products and view user orders.
-
-### Backend
-- **Models**: User, Product, Order
-- **Routes**: Authentication, Product Management, Order Management
-- **Controllers**: Handles the logic for each route, interacting with MongoDB through Mongoose.
-
-### Frontend
-- **Components**: Separate components for listing products, order forms, admin dashboard, etc.
-- **State Management**: Redux is used for managing the state of products, orders, and user authentication.
+This is a simple shopping application built with Node.js, Express, and MongoDB.
 
 ## Getting Started
 
-### Prerequisites
+To get started, follow these steps:
 
-- Node.js
-- MongoDB
-- Git
+1. Clone the repository:
 
-### Installation
+```bash
+git clone https://github.com/your-username/shopping-app.git
+cd shopping-app
+```
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-username/gift-shop.git
-   cd gift-shop
-Backend Setup
+2. Install dependencies:
 
-bash
-
-cd backend
+```bash
 npm install
-Environment Variables
+```
 
-Create a .env file in the backend folder and add the following:
+3. Create a `.env` file in the root directory and add the following environment variables:
 
-
+```properties
 PORT=5000
-MONGO_URI=<Your MongoDB URI>
-JWT_SECRET=<Your JWT Secret>
-Run the Backend
+MONGO_URI=mongodb+srv://firaolteshale:3h8F2nJPcq4Yyitr@cluster0.bc25gmo.mongodb.net/Shop?retryWrites=true&w=majority&appName=Cluster0
+JWT_SECRET=Ht7@Xq2Lm8!Zp9$Ck5%Wj3^Ry4&Vb6*Uq1(Tn2)Lz3[Xm4]
+```
 
-bash
+4. Start the server:
 
+```bash
 npm start
-Frontend Setup
+```
 
-bash
+Now you can access the API at `http://localhost:5000`.
 
-cd ../frontend
-npm install
-Run the Frontend
+## API Endpoints
 
-bash
-npm start
-API Endpoints
-User Routes
-POST /api/auth/register - Register a new user
-POST /api/auth/login - Login a user
-POST /api/orders - Place a new order (User only)
-Admin Routes
-GET /api/orders/:userId - Get orders placed by a specific user (Admin only)
-POST /api/products - Add a new product (Admin only)
-DELETE /api/products/:id - Remove a product (Admin only)
-Future Enhancements
-Add payment gateway integration.
-Implement search and filter options for products.
-Add product reviews and ratings.
-Implement email notifications for order confirmations.
-License
-This project is open-source and available under the MIT License.
+- POST `/api/users/register` - Register a new user
+- POST `/api/users/login` - Login and get a JWT token
+- GET `/api/products` - Get all products
+- GET `/api/products/:id` - Get a single product by ID
+- POST `/api/products` - Create a new product (requires authentication)
+- PUT `/api/products/:id` - Update an existing product (requires authentication)
+- DELETE `/api/products/:id` - Delete a product (requires authentication)
+- POST `/api/cart` - Add a product to the cart (requires authentication)
+- GET `/api/cart` - Get the current user's cart (requires authentication)
+- DELETE `/api/cart/:id` - Remove a product from the cart (requires authentication)
+- POST `/api/orders` - Place an order (requires authentication)
+- GET `/api/orders` - Get all orders (requires authentication)
+- GET `/api/orders/:id` - Get a single order by ID (requires authentication)
 
-Feel free to contribute and enhance the project. For any issues or feature requests, please open an issue on GitHub.
+## Built With
 
-typescript
+- [Node.js](https://nodejs.org/) - The server-side JavaScript runtime
+- [Express](https://expressjs.com/) - A fast, unopinionated, minimalist web framework for Node.js
+- [MongoDB](https://www.mongodb.com/) - A NoSQL database
+- [Mongoose](https://mongoosejs.com/) - A MongoDB object modeling tool designed to work in an asynchronous environment
+- [JSON Web Tokens](https://jwt.io/) - A compact, URL-safe means of representing claims to be transferred between two parties
 
-Replace `<Your MongoDB URI>` and `<Your JWT Secret>` with your actual credentials and adjust 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```
