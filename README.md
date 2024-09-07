@@ -1,5 +1,5 @@
 
-# Gift Shop Website
+# Bella Cosmotics Shop Website
 
 This project is a full-stack application for a gift shop that offers products like flowers, vases, and more. The website allows clients to browse products and place orders, while the shop owner (admin) can manage products and view orders through an admin dashboard.
 
@@ -26,9 +26,8 @@ This project is a full-stack application for a gift shop that offers products li
 
 ## Tech Stack
 
-- **Frontend**: React, CSS, Emotion (for styling)
+- **Frontend**: React, TailwindCSS, Shadecn (for styling)
 - **Backend**: Node.js, Express.js, MongoDB, Mongoose
-- **State Management**: Redux Toolkit, Redux Saga
 - **Authentication**: JWT (JSON Web Tokens)
 - **Version Control**: Git, GitHub
 
