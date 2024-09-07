@@ -115,3 +115,40 @@ Run the Frontend:
 ```bash
 npm start
 ```
+## API Endpoints
+
+### User Routes
+
+- **POST** `/api/users/register` - Register a new user
+- **POST** `/api/users/login` - Login and get a JWT token
+
+### Product Routes
+
+- **GET** `/api/products` - Get all products
+- **GET** `/api/products/:id` - Get a single product by ID
+- **POST** `/api/products` - Create a new product (requires authentication)
+- **PUT** `/api/products/:id` - Update an existing product (requires authentication)
+- **DELETE** `/api/products/:id` - Delete a product (requires authentication)
+
+### Cart Routes
+
+- **POST** `/api/cart` - Add a product to the cart (requires authentication)
+- **GET** `/api/cart` - Get the current user's cart (requires authentication)
+- **DELETE** `/api/cart/:id` - Remove a product from the cart (requires authentication)
+
+### Order Routes
+
+- **POST** `/api/orders` - Place an order (requires authentication)
+- **GET** `/api/orders` - Get all orders (requires authentication)
+- **GET** `/api/orders/:id` - Get a single order by ID (requires authentication)
+
+## Future Enhancements
+
+- Add payment gateway integration.
+- Implement search and filter options for products.
+- Add product reviews and ratings.
+- Implement email notifications for order confirmations.
+
+## License
+
+This project is open-source and available under the MIT License.
