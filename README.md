@@ -65,4 +65,68 @@ Now you can access the API at `http://localhost:5000`.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
+
+markdown
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js
+- MongoDB
+- Git
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/gift-shop.git
+   cd gift-shop
+Backend Setup
+
+bash
+Copy code
+cd backend
+npm install
+Environment Variables
+
+Create a .env file in the backend folder and add the following:
+
+plaintext
+Copy code
+PORT=5000
+MONGO_URI=<Your MongoDB URI>
+JWT_SECRET=<Your JWT Secret>
+Run the Backend
+
+bash
+
+npm start
+Frontend Setup
+
+bash
+
+cd ../frontend
+npm install
+Run the Frontend
+
+bash
+npm start
+API Endpoints
+User Routes
+POST /api/auth/register - Register a new user
+POST /api/auth/login - Login a user
+POST /api/orders - Place a new order (User only)
+Admin Routes
+GET /api/orders/:userId - Get orders placed by a specific user (Admin only)
+POST /api/products - Add a new product (Admin only)
+DELETE /api/products/:id - Remove a product (Admin only)
+Future Enhancements
+Add payment gateway integration.
+Implement search and filter options for products.
+Add product reviews and ratings.
+Implement email notifications for order confirmations.
+License
+This project is open-source and available under the MIT License.
+
+
