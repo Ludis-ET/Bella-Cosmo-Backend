@@ -59,19 +59,8 @@ The project is structured to have separate sections for clients and the admin.
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/gift-shop.git
-   cd gift-shop
-## Backend Setup
-
-
-```
-## Backend Setup
-
-Navigate to the backend directory:
-
-```bash
-cd backend
-```
+   git clone https://github.com/firaolteshale21/Bella-Cosmo
+   cd Bella-Cosmo
 
 Install dependencies:
 
