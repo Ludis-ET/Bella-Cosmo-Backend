@@ -62,8 +62,16 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
+//Logout user (this will clear the session) but we can also create a "token" field in the database and save the 
+//users token in it and when ever the user is logged out it will be cleared
+
+const logoutUser = asyncHandler(async (req, res) => {
+  res.clearCookie("token");
+  res.json({ success: true, message: "User logged out" });
+});
 
 module.exports = {
   registerUser,
   loginUser,
+  logoutUser,
 };

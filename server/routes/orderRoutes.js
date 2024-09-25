@@ -7,9 +7,4 @@ router.post("/", protectUser, placeOrder);
 
 router.get("/:userId", protectAdmin, getUserOrders);
 
-
-
-
-router.p
-
 module.exports = router;

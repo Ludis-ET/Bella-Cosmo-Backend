@@ -15,22 +15,28 @@ mongoose
         name: "Product 1",
         description: "This is a sample product",
         price: 9.99,
-        quantity: 100,
+        quantity: 100, 
         category: "Category 1",
+        stock: 10, 
+        imageUrl: "https://example.com/product1.jpg", // Added imageUrl field
       },
       {
         name: "Product 2",
         description: "Another sample product",
         price: 19.99,
-        quantity: 50,
+        quantity: 50, 
         category: "Category 2",
+        stock: 20, 
+        imageUrl: "https://example.com/product2.jpg", // Added imageUrl field
       },
       {
         name: "Product 3",
         description: "Yet another sample product",
         price: 29.99,
-        quantity: 25,
+        quantity: 25, 
         category: "Category 3",
+        stock: 30, 
+        imageUrl: "https://example.com/product3.jpg", // Added imageUrl field
       },
     ];
 

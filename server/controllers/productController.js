@@ -6,7 +6,6 @@ const connectDB = require('../config/db');
 const Product = require("../models/Product");
 
 dotenv.config();
-const app = express();
 
 //function to get the products in my database
 
@@ -81,13 +80,46 @@ const deleteProduct = async (req, res) => {
 
     res.json({ message: "Product deleted successfully" });
 };
+//create a search controller for the product using name 
+//its will return all products that match the search criteria
 
+const searchProducts = async (req, res) => {
+  const { query } = req.query; // Get the search query from query parameters
+
+  if (!query) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Search query is required." });
+  }
+
+  try {
+    // Use a regex for a case-insensitive search
+    const products = await Product.find({
+      $or: [
+        { name: { $regex: query, $options: "i" } }, // Search by name
+        { description: { $regex: query, $options: "i" } }, // Search by description
+      ],
+    });
+
+    if (products.length === 0) {
+      return res
+        .status(404)
+        .json({ success: false, message: "No products found." });
+    }
+
+    res.json({ success: true, data: products });
+  } catch (error) {
+    console.error(error); // Log the error for debugging
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 //exporting the functions
 
 module.exports = {
-    getProducts,
-    getProductById,
-    createProduct,
-    updateProduct,
-    deleteProduct
+  getProducts,
+  getProductById,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+  searchProducts,
 };

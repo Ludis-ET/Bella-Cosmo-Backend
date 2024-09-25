@@ -93,6 +93,23 @@ const getUsers = asyncHandler(async (req, res) => {
   });
 });
 
+// @desc    Remove User
+// @route DELETE /api/admin/users
+// @access  Private/Admin
+
+const removeUser = asyncHandler(async (req, res) => {
+  const { id: _id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).json({ message: "Invalid id" });
+
+  const user = await User.findByIdAndDelete(_id);
+
+  if (!user) return res.status(404).json({ message: "User not found" });
+
+  res.json({ message: "User deleted successfully" });
+});
+
+
 // @desc    Logout admin
 // @route   POST /api/admin/logout
 // @access  Private/Admin
@@ -106,7 +123,7 @@ const logoutAdmin = asyncHandler(async (req, res) => {
     }
 
     // Filter out the token from the admin's tokens array
-    req.admin.tokens = req.admin.tokens.filter((token) => token !== req.token);
+    req.admin.tokens = req.admin.tokens.filter((token) => token !== req.token); //remove the token from the admin's tokens array
 
     // Save the updated admin document
     await req.admin.save();
@@ -121,5 +138,6 @@ module.exports = {
   registerAdmin,
   loginAdmin,
   getUsers,
+  removeUser,
   logoutAdmin,
 };
