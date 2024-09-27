@@ -18,7 +18,7 @@ mongoose
         price: 49.99,
         quantity: 100,
         category: "Skincare",
-        image: "https://via.placeholder.com/150/face-serum.jpg",
+        image: "https://via.assets.so/img.jpg?w=400&h=300&tc=blue&bg=#cecece",
       },
       {
         name: "Hydrating Night Cream",
@@ -27,7 +27,7 @@ mongoose
         price: 39.99,
         quantity: 120,
         category: "Skincare",
-        image: "https://via.placeholder.com/150/night-cream.jpg",
+        image: "https://via.assets.so/img.jpg?w=400&h=300&tc=blue&bg=#cecece",
       },
       {
         name: "Vitamin C Brightening Serum",

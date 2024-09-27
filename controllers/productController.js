@@ -1,8 +1,10 @@
 //product controllers
 
-const express = require("express");
+
+const mongoose = require("mongoose");
+
 const dotenv = require("dotenv");
-const connectDB = require("../config/db");
+
 const Product = require("../models/Product");
 
 dotenv.config();
@@ -74,15 +76,26 @@ const updateProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
   const { id: _id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(_id))
-    return res.status(404).json({ message: "Invalid id" });
+  // Check if the ID is valid
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(400).json({ message: "Invalid ID" });
+  }
 
-  const deletedProduct = await Product.findByIdAndDelete(_id);
+  try {
+    // Try to delete the product by ID
+    const deletedProduct = await Product.findByIdAndDelete(_id);
 
-  if (!deletedProduct)
-    return res.status(404).json({ message: "Product not found" });
+    // Check if the product exists
+    if (!deletedProduct) {
+      return res.status(404).json({ message: "Product not found" });
+    }
 
-  res.json({ message: "Product deleted successfully" });
+    res.json({ message: "Product deleted successfully" });
+  } catch (error) {
+    // Log the error and send a 500 response, but don't crash the server
+    console.error("Error deleting product:", error);
+    res.status(500).json({ message: "Server error. Please try again later." });
+  }
 };
 //create a search controller for the product using name
 //its will return all products that match the search criteria
