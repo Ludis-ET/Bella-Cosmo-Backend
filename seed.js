@@ -19,9 +19,13 @@ mongoose
         price: 49.99,
         stock: 100,
         category: "Skincare",
+<<<<<<< HEAD
         image1Url: "https://via.placeholder.com/150/face-serum1.jpg",
         image2Url: "https://via.placeholder.com/150/face-serum2.jpg",
         image3Url: "https://via.placeholder.com/150/face-serum3.jpg",
+=======
+        image: "https://via.assets.so/img.jpg?w=400&h=300&tc=blue&bg=#cecece",
+>>>>>>> 72d5b347ca3e3249b3ac73a5c87e6b0fd76e6314
       },
       {
         name: "Hydrating Night Cream",
@@ -30,9 +34,13 @@ mongoose
         price: 39.99,
         stock: 120,
         category: "Skincare",
+<<<<<<< HEAD
         image1Url: "https://via.placeholder.com/150/night-cream1.jpg",
         image2Url: "https://via.placeholder.com/150/night-cream2.jpg",
         image3Url: "https://via.placeholder.com/150/night-cream3.jpg",
+=======
+        image: "https://via.assets.so/img.jpg?w=400&h=300&tc=blue&bg=#cecece",
+>>>>>>> 72d5b347ca3e3249b3ac73a5c87e6b0fd76e6314
       },
       {
         name: "Vitamin C Brightening Serum",
