@@ -5,47 +5,33 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => Product.deleteMany({}))
   .then(() => {
     const products = [
       {
         name: "Revitalizing Face Serum",
-        description:
-          "A serum that hydrates and replenishes your skin, leaving it radiant with a long-lasting glow. This formula penetrates deep into the skin layers to provide moisture and improve texture.",
+        description: "A serum that hydrates and replenishes your skin, leaving it radiant with a long-lasting glow. This formula penetrates deep into the skin layers to provide moisture and improve texture.",
         price: 49.99,
         stock: 100,
         category: "Skincare",
-<<<<<<< HEAD
         image1Url: "https://via.placeholder.com/150/face-serum1.jpg",
         image2Url: "https://via.placeholder.com/150/face-serum2.jpg",
         image3Url: "https://via.placeholder.com/150/face-serum3.jpg",
-=======
-        image: "https://via.assets.so/img.jpg?w=400&h=300&tc=blue&bg=#cecece",
->>>>>>> 72d5b347ca3e3249b3ac73a5c87e6b0fd76e6314
       },
       {
         name: "Hydrating Night Cream",
-        description:
-          "Rich night cream that restores your skin’s glow while you sleep. Infused with natural ingredients like hyaluronic acid and shea butter.",
+        description: "Rich night cream that restores your skin’s glow while you sleep. Infused with natural ingredients like hyaluronic acid and shea butter.",
         price: 39.99,
         stock: 120,
         category: "Skincare",
-<<<<<<< HEAD
         image1Url: "https://via.placeholder.com/150/night-cream1.jpg",
         image2Url: "https://via.placeholder.com/150/night-cream2.jpg",
         image3Url: "https://via.placeholder.com/150/night-cream3.jpg",
-=======
-        image: "https://via.assets.so/img.jpg?w=400&h=300&tc=blue&bg=#cecece",
->>>>>>> 72d5b347ca3e3249b3ac73a5c87e6b0fd76e6314
       },
       {
         name: "Vitamin C Brightening Serum",
-        description:
-          "Brighten your skin with this powerful Vitamin C formula. It helps reduce dark spots, even out skin tone, and improve overall skin texture.",
+        description: "Brighten your skin with this powerful Vitamin C formula. It helps reduce dark spots, even out skin tone, and improve overall skin texture.",
         price: 59.99,
         stock: 75,
         category: "Skincare",
@@ -55,8 +41,7 @@ mongoose
       },
       {
         name: "Moisturizing Body Lotion",
-        description:
-          "Deeply nourishing body lotion to keep your skin soft all day long.",
+        description: "Deeply nourishing body lotion to keep your skin soft all day long.",
         price: 25.99,
         stock: 150,
         category: "Body Care",
@@ -66,8 +51,7 @@ mongoose
       },
       {
         name: "Exfoliating Face Scrub",
-        description:
-          "Gentle exfoliating scrub that removes dead skin cells and unclogs pores.",
+        description: "Gentle exfoliating scrub that removes dead skin cells and unclogs pores.",
         price: 29.99,
         stock: 110,
         category: "Skincare",
@@ -87,8 +71,7 @@ mongoose
       },
       {
         name: "Clarifying Face Mask",
-        description:
-          "Detoxify your skin with this clarifying mask, made with natural clay.",
+        description: "Detoxify your skin with this clarifying mask, made with natural clay.",
         price: 34.99,
         stock: 90,
         category: "Skincare",
@@ -98,8 +81,7 @@ mongoose
       },
       {
         name: "Sunscreen SPF 50",
-        description:
-          "High-protection sunscreen for all-day outdoor activities.",
+        description: "High-protection sunscreen for all-day outdoor activities.",
         price: 19.99,
         stock: 130,
         category: "Skincare",
@@ -109,8 +91,7 @@ mongoose
       },
       {
         name: "Anti-Aging Eye Cream",
-        description:
-          "Reduce fine lines and dark circles with this anti-aging eye cream.",
+        description: "Reduce fine lines and dark circles with this anti-aging eye cream.",
         price: 44.99,
         stock: 60,
         category: "Skincare",
@@ -120,8 +101,7 @@ mongoose
       },
       {
         name: "Rejuvenating Hair Oil",
-        description:
-          "Nourish and revitalize your hair with this lightweight hair oil.",
+        description: "Nourish and revitalize your hair with this lightweight hair oil.",
         price: 24.99,
         stock: 140,
         category: "Hair Care",
@@ -131,8 +111,7 @@ mongoose
       },
       {
         name: "Rose Water Toner",
-        description:
-          "A gentle toner that balances your skin’s pH and refreshes your face.",
+        description: "A gentle toner that balances your skin’s pH and refreshes your face.",
         price: 14.99,
         stock: 180,
         category: "Skincare",
@@ -142,8 +121,7 @@ mongoose
       },
       {
         name: "Whipped Body Butter",
-        description:
-          "Indulge your skin with this ultra-hydrating whipped body butter.",
+        description: "Indulge your skin with this ultra-hydrating whipped body butter.",
         price: 32.99,
         stock: 80,
         category: "Body Care",
@@ -153,8 +131,7 @@ mongoose
       },
       {
         name: "Brightening Face Oil",
-        description:
-          "Lightweight face oil that evens skin tone and adds a radiant glow.",
+        description: "Lightweight face oil that evens skin tone and adds a radiant glow.",
         price: 49.99,
         stock: 85,
         category: "Skincare",
@@ -164,8 +141,7 @@ mongoose
       },
       {
         name: "Coconut Milk Shampoo",
-        description:
-          "A nourishing shampoo that strengthens and moisturizes your hair.",
+        description: "A nourishing shampoo that strengthens and moisturizes your hair.",
         price: 22.99,
         stock: 110,
         category: "Hair Care",
@@ -185,8 +161,7 @@ mongoose
       },
       {
         name: "Lavender Bath Salts",
-        description:
-          "Relax and unwind with these soothing lavender bath salts.",
+        description: "Relax and unwind with these soothing lavender bath salts.",
         price: 15.99,
         stock: 170,
         category: "Body Care",
@@ -196,8 +171,7 @@ mongoose
       },
       {
         name: "Hand Cream with Shea Butter",
-        description:
-          "Moisturizing hand cream infused with organic shea butter.",
+        description: "Moisturizing hand cream infused with organic shea butter.",
         price: 12.99,
         stock: 140,
         category: "Body Care",
@@ -227,8 +201,7 @@ mongoose
       },
       {
         name: "Bamboo Toothbrush",
-        description:
-          "Eco-friendly bamboo toothbrush for sustainable oral care.",
+        description: "Eco-friendly bamboo toothbrush for sustainable oral care.",
         price: 4.99,
         stock: 300,
         category: "Oral Care",
@@ -238,8 +211,7 @@ mongoose
       },
       {
         name: "Organic Cotton Face Towels",
-        description:
-          "Soft organic cotton face towels for a gentle touch on your skin.",
+        description: "Soft organic cotton face towels for a gentle touch on your skin.",
         price: 19.99,
         stock: 150,
         category: "Body Care",
@@ -249,8 +221,7 @@ mongoose
       },
       {
         name: "Eucalyptus Essential Oil",
-        description:
-          "Refresh your mind with invigorating eucalyptus essential oil.",
+        description: "Refresh your mind with invigorating eucalyptus essential oil.",
         price: 12.49,
         stock: 90,
         category: "Aromatherapy",
@@ -260,8 +231,7 @@ mongoose
       },
       {
         name: "Nourishing Face Mask",
-        description:
-          "Deeply nourishing face mask that rejuvenates and revitalizes.",
+        description: "Deeply nourishing face mask that rejuvenates and revitalizes.",
         price: 29.99,
         stock: 75,
         category: "Skincare",
@@ -301,8 +271,7 @@ mongoose
       },
       {
         name: "Hydrating Face Mist",
-        description:
-          "A refreshing face mist to hydrate and revitalize your skin throughout the day.",
+        description: "A refreshing face mist to hydrate and revitalize your skin throughout the day.",
         price: 15.99,
         stock: 120,
         category: "Skincare",
