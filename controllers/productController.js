@@ -54,21 +54,26 @@ const createProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
   const { id: _id } = req.params;
-  const { name, price, description } = req.body;
+  const { name, price, description, category, stock } = req.body;
 
-  if (!mongoose.Types.ObjectId.isValid(_id))
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
     return res.status(404).json({ message: "Invalid id" });
+  }
 
   const updatedProduct = await Product.findByIdAndUpdate(
     _id,
-    { name, price, description },
+    { name, price, description, category, stock },
     { new: true }
   );
 
-  if (!updatedProduct)
+  if (!updatedProduct) {
     return res.status(404).json({ message: "Product not found" });
+  }
 
-  res.json(updatedProduct);
+  res.json({
+    message: "Update Successful",
+    product: updatedProduct,
+  });
 };
 
 //function to delete an existing product
