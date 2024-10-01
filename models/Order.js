@@ -15,7 +15,8 @@ const orderItemSchema = new mongoose.Schema(
 
 const orderSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    customerName: { type: String, required: true }, // Customer name instead of user reference
+    phoneNumber: { type: String, required: true }, // Customer phone number
     orderItems: [orderItemSchema], // Array of order items
     totalPrice: { type: Number, required: true },
   },

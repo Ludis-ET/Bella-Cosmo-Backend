@@ -2,69 +2,52 @@ const asyncHandler = require("express-async-handler");
 const Order = require("../models/Order");
 const Product = require("../models/Product");
 
-// @desc    Place a new order
-// @route   POST /api/orders
-// @access  Private (User)
 const placeOrder = asyncHandler(async (req, res) => {
-  const { orderItems, totalPrice } = req.body;
+  const { customerName, phoneNumber, orderItems, totalPrice } = req.body;
 
-  // Check if order items are provided
   if (!orderItems || orderItems.length === 0) {
     res.status(400);
     throw new Error("No order items");
   }
 
-  // Validate each order item: Check if the product exists and calculate total price if needed
   for (const item of orderItems) {
     const product = await Product.findById(item.product);
     if (!product) {
       res.status(404);
       throw new Error(`Product not found: ${item.product}`);
     }
-    // Optionally validate stock or price here if needed
   }
 
-  // Create a new order
   const order = new Order({
-    user: req.user._id, // Set the user from the logged-in user
+    customerName,
+    phoneNumber,
     orderItems,
     totalPrice,
   });
 
-  // Save the order to the database
   const createdOrder = await order.save();
   res.status(201).json(createdOrder);
 });
 
-// @desc    Get orders placed by a specific user
-// @route   GET /api/orders/:userId
-// @access  Private (Admin)
 
 const getUserOrders = asyncHandler(async (req, res) => {
-  const { userId } = req.params;
+  const { customerName } = req.params;
 
-  // Fetch orders placed by the user with the given userId
-  const orders = await Order.find({ user: userId })
-    .populate("user", "name phoneNumber") // Ensure to include user's name and phoneNumber
-    .populate("orderItems.product", "name") // Populate the product name for each order item
+  const orders = await Order.find({ customerName })
+    .populate("orderItems.product", "name")
     .exec();
 
-  // If no orders found
   if (!orders || orders.length === 0) {
     res.status(404);
-    throw new Error("No orders found for this user");
+    throw new Error("No orders found for this customer");
   }
 
-  // Format the response
   const formattedOrders = orders.map((order) => ({
-    user: {
-      name: order.user.name,
-      phoneNumber: order.user.phoneNumber,
-    },
+    customerName: order.customerName,
+    phoneNumber: order.phoneNumber,
     orderItems: order.orderItems.map((item) => ({
       productName: item.product.name,
       quantity: item.quantity,
-      //price: item.price,
     })),
     totalPrice: order.totalPrice,
   }));
