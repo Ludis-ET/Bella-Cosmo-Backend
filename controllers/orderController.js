@@ -55,7 +55,7 @@ const placeOrder = asyncHandler(async (req, res) => {
           </tr>
           <tr>
             <th style="text-align: left; padding: 8px; background-color: #f9f9f9;">Total Price</th>
-            <td style="padding: 8px;">$${totalPrice}</td>
+            <td style="padding: 8px;">${totalPrice}ETB</td>
           </tr>
         </table>
 
